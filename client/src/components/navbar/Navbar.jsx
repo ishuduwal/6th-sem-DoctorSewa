@@ -10,7 +10,7 @@ export const Navbar = () => {
 
     return (
         <>
-            <div className='flex justify-between items-center px-20 h-16 w-full bg-port-gore-950 text-white fixed'>
+            <div className='flex justify-between items-center px-20 h-16 w-full bg-port-gore-950 text-white fixed max-sm:px-8'>
                 <div className='text-xl font-normal'>
                     <p><i className="fa-solid fa-notes-medical text-2xl pr-2"></i>Swastha सेवा</p>
                 </div>
@@ -21,7 +21,7 @@ export const Navbar = () => {
                 </ul>
                 <div className='hidden max-md:flex'>
                     <button onClick={toggleMenu}>
-                        <i className="fa-solid fa-bars-staggered text-2xl"></i>
+                        <i className={`fa-solid ${isMenuOpen ? 'fa-xmark' : 'fa-bars-staggered'} text-2xl`}></i>
                     </button>
                 </div>
             </div>

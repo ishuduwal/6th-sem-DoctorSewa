@@ -26,6 +26,9 @@ export default {
         'max-md': { 'max': '767px' },
         'max-lg': { 'max': '1024px' },
       },
+      text: {
+        'font-size': '1rem'
+      },
     },
   },
   plugins: [],
