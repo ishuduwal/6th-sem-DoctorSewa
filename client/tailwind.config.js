@@ -21,6 +21,11 @@ export default {
           '950': '#252146',
         },
       },
+      screens: {
+        'max-sm': { 'max': '640px' },
+        'max-md': { 'max': '767px' },
+        'max-lg': { 'max': '1024px' },
+      },
     },
   },
   plugins: [],
