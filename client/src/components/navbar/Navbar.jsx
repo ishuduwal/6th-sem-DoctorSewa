@@ -10,14 +10,14 @@ export const Navbar = () => {
 
     return (
         <>
-            <div className='flex justify-between items-center px-20 h-16 w-full bg-port-gore-950 text-white fixed max-sm:px-8'>
+            <div className='flex justify-between items-center px-20 h-16 w-full bg-purple-main-69 text-white fixed max-sm:px-8'>
                 <div className='text-xl font-normal'>
-                    <p><i className="fa-solid fa-notes-medical text-2xl pr-2"></i>Swastha सेवा</p>
+                    <Link to='/'><i className="fa-solid fa-notes-medical text-2xl pr-2"></i>Swastha सेवा</Link>
                 </div>
                 <ul className='flex gap-12 max-md:hidden'>
                     <li><Link to='/'>Home</Link></li>
                     <li>Our Doctors</li>
-                    <li className='flex items-center gap-2'><i className="fa-solid fa-user"></i><p>Sign in</p></li>
+                    <li><Link to='/login' className='flex items-center gap-2'><i className="fa-solid fa-user"></i><p>Sign in</p></Link></li>
                 </ul>
                 <div className='hidden max-md:flex'>
                     <button onClick={toggleMenu}>
@@ -30,7 +30,7 @@ export const Navbar = () => {
                     <ul className='flex flex-col gap-4 text-center items-center'>
                         <li><Link to='/'>Home</Link></li>
                         <li>Our Doctors</li>
-                        <li className='flex items-center gap-2'><i className="fa-solid fa-user"></i><p>Sign in</p></li>
+                        <li><Link to='/login' className='flex items-center gap-2'><i className="fa-solid fa-user"></i><p>Sign in</p></Link></li>
                     </ul>
                 </div>
             )}

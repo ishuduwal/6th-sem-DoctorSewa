@@ -10,7 +10,7 @@ export const Home = () => {
                     <h1 className='text-4xl font-black max-lg:text-3xl'>Your health, Your Schedule</h1>
                     <h1 className='text-4xl font-black max-lg:text-3xl'>Easy appointments, Better Care</h1>
                     <p className='mt-4'>Take control of your health today. Book your appointment now and connect with top healthcare professionals.</p>
-                    <button className='mt-4 bg-port-gore-900 p-2 text-white rounded'>Book an Appointment</button>
+                    <button className='mt-4 bg-purple-main-69 p-2 text-white rounded'>Book an Appointment</button>
                 </div>
                 <div>
                     <img src={doctor} />
