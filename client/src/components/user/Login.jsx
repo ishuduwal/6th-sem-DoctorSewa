@@ -18,14 +18,18 @@ export const Login = () => {
                     <p className='mt-2'>Welcome back! Please enter your details.</p>
 
                     <div className='mt-6'>
-                        <input type='email' placeholder='Email' className='w-full mt-4 p-2 border border-black ' />
+                        <label className="block">Email</label>
+                        <input type='email' placeholder="tylerdurden@gmail.com" className='w-full p-2 mb-2 border border-black ' />
                     </div>
-                    <div className='mt-4 flex'>
-                        <input type={showPassword ? "text" : "password"} placeholder='Password' className='w-full mt-4 p-2 border-t border-l border-b border-black  ' />
-                        <div className='cursor-pointer mt-6 border-black border-r border-t border-b' onClick={handlePassword}>{showPassword ? (<i class="fa-solid fa-eye"></i>) : (<i class="fa-solid fa-eye-slash"></i>)}</div>
+                    <div className='mt-4'>
+                        <label className="block">Password</label>
+                        <div className='flex'>
+                            <input type={showPassword ? "text" : "password"} placeholder="Min, 6 characters" className='w-full  p-2 border-t border-l border-b border-black  ' />
+                            <div className='cursor-pointer mt-6 border-black border-r border-t border-b' onClick={handlePassword}>{showPassword ? (<i class="fa-solid fa-eye"></i>) : (<i class="fa-solid fa-eye-slash"></i>)}</div>
+                        </div>
                     </div>
                     <div className='mt-6 text-right'>
-                        <Link to='/forgot-password' className='underline'>Forgot Password?</Link>
+                        <Link to='/forgotpassword' className='underline'>Forgot Password?</Link>
                     </div>
                     <div className='mt-2'>
                         <button className='w-full p-2 bg-purple-main-69 text-white  hover:bg-purple-900'>Sign in</button>

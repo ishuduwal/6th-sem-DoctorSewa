@@ -16,7 +16,7 @@ export const Navbar = () => {
                 </div>
                 <ul className='flex gap-12 max-md:hidden'>
                     <li><Link to='/'>Home</Link></li>
-                    <li>Our Doctors</li>
+                    <li><Link to='/doctors'>Our Doctors</Link></li>
                     <li><Link to='/login' className='flex items-center gap-2'><i className="fa-solid fa-user"></i><p>Sign in</p></Link></li>
                 </ul>
                 <div className='hidden max-md:flex'>
@@ -29,7 +29,7 @@ export const Navbar = () => {
                 <div className='bg-purple-main-69 text-white fixed top-16 left-0 w-full p-4'>
                     <ul className='flex flex-col gap-4 text-center items-center'>
                         <li><Link to='/'>Home</Link></li>
-                        <li>Our Doctors</li>
+                        <li><Link to='/doctors'>Our Doctors</Link></li>
                         <li><Link to='/login' className='flex items-center gap-2'><i className="fa-solid fa-user"></i><p>Sign in</p></Link></li>
                     </ul>
                 </div>
