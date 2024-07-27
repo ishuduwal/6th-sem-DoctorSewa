@@ -6,6 +6,9 @@ import { Login } from "./components/user/Login";
 import { Signup } from "./components/user/Signup";
 import { ForgotPassword } from "./components/user/ForgotPassword";
 import { AdminDashboard } from "./components/admin/AdminDashboard";
+import { DoctorDashboard } from "./components/doctor/DoctorDashboard";
+import { Appointment } from "./components/appointment/Appointment";
+import { UserDashboard } from "./components/user/UserDashboard/UserDashboard";
 
 function App() {
 
@@ -20,6 +23,9 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/forgotpassword' element={<ForgotPassword />} />
             <Route path='/admin-dashboard' element={<AdminDashboard />} />
+            <Route path='/doctor-dashboard' element={<DoctorDashboard />} />
+            <Route path='/appointment' element={<Appointment />} />
+            <Route path='/user-dashboard' element={<UserDashboard />} />
           </Routes>
         </Router>
       </div>
