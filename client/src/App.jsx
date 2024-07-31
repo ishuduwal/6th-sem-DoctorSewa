@@ -9,6 +9,7 @@ import { AdminDashboard } from "./components/admin/AdminDashboard";
 import { DoctorDashboard } from "./components/doctor/DoctorDashboard";
 import { Appointment } from "./components/appointment/Appointment";
 import { UserDashboard } from "./components/user/UserDashboard/UserDashboard";
+import { AppointmentDetail } from "./components/appointment/AppointmentDetail";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route path='/admin-dashboard' element={<AdminDashboard />} />
             <Route path='/doctor-dashboard' element={<DoctorDashboard />} />
             <Route path='/appointment' element={<Appointment />} />
+            <Route path='/appointment-detail' element={<AppointmentDetail />} />
             <Route path='/user-dashboard' element={<UserDashboard />} />
           </Routes>
         </Router>

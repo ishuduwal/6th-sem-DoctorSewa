@@ -27,6 +27,7 @@ export default {
       screens: {
         'max-sm': { 'max': '640px' },
         'max-md': { 'max': '767px' },
+        'max-ap': { 'max': '930px' },
         'max-lg': { 'max': '1024px' },
       },
       text: {
