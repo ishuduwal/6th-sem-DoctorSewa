@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import doctor from '../../assets/doctor.jpg'
 
 export const AppointmentDetail = () => {
     const [date, setDate] = useState('')
@@ -26,7 +25,6 @@ export const AppointmentDetail = () => {
                     <p className='text-md mt-2'>Cardiologist</p>
                     <p className='text-md mt-2'>Fee: Rs. 350</p>
                     <p className='text-md mt-2'>Specialist with 10 years of experience</p>
-                    <p className='text-md mt-4'>Please arrive 10 minutes before your scheduled appointment time.</p>
 
                     <div className='mt-8'>
                         <h2 className='text-xl font-semibold'>Check Availability</h2>
