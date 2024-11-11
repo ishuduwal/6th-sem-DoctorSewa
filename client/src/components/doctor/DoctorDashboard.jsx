@@ -10,8 +10,9 @@ export const DoctorDashboard = () => {
         localStorage.removeItem('doctorName');
         localStorage.removeItem('doctorId');
         localStorage.removeItem('doctorInfo');
-
+        localStorage.removeItem('userType');
         navigate('/');
+        window.location.reload();
     };
     return (
         <div className='flex h-screen w-full pt-16 max-lg:flex-col'>

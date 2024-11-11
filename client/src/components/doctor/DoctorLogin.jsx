@@ -35,6 +35,7 @@ export const DoctorLogin = () => {
                 localStorage.setItem('doctorEmail', res.email);
                 localStorage.setItem('doctorName', res.name);
                 localStorage.setItem('doctorId', res._id);
+                localStorage.setItem('userType', 'doctor'); // Store user type
                 localStorage.setItem('doctorInfo', JSON.stringify(res));
 
                 setDoctor({

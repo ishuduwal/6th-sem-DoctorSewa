@@ -2,8 +2,15 @@ import React, { useState } from 'react';
 import { DoctorList } from './DoctorList';
 import { AddDoctors } from './AddDoctors';
 import { UserList } from './UserList';
+import { Navigate } from 'react-router-dom';
 export const AdminDashboard = () => {
     const [selectedSection, setSelectedSection] = useState('welcome');
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('userType');
+        Navigate('/');
+        window.location.reload();
+    };
     return (
         <div className='flex w-full pt-16 max-lg:flex-col'>
             <div className='w-60 bg-gray-300 text-black shadow-lg p-5 fixed h-screen max-lg:static max-lg:w-full max-lg:h-20 max-lg:flex max-lg:justify-between max-lg:px-8'>
@@ -12,6 +19,7 @@ export const AdminDashboard = () => {
                     <li className={`cursor-pointer max-lg:h-2rem max-lg:w-28 p-2 ${selectedSection === 'add-doctors' ? 'bg-purple-700 text-white' : 'bg-white hover:bg-purple-500 hover:text-white'}`} onClick={() => setSelectedSection('add-doctors')}>Add Doctors</li>
                     <li className={`cursor-pointer max-lg:h-2rem max-lg:w-20 p-2 ${selectedSection === 'doctor-list' ? 'bg-purple-700 text-white' : 'bg-white hover:bg-purple-500 hover:text-white'}`} onClick={() => setSelectedSection('doctor-list')}>Doctors</li>
                     <li className={`cursor-pointer max-lg:h-2rem max-lg:w-20 p-2 ${selectedSection === 'user-list' ? 'bg-purple-700 text-white' : 'bg-white hover:bg-purple-500 hover:text-white'}`} onClick={() => setSelectedSection('user-list')}>Users</li>
+                    <li className={`cursor-pointer bg-white max-lg:h-2rem max-lg:w-28 p-2`} onClick={handleLogout}>Logout</li>
                 </ul>
             </div>
             <div className='w-full h-screen bg-gray-100 p-10 pl-72 max-lg:pl-0 max-lg:flex max-lg:items-center max-lg:justify-center max-lg:p-0'>

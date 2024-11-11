@@ -23,15 +23,26 @@ export const Login = () => {
         };
 
         try {
+            // Make the API call to authenticate the user
             const res = await LoginUser(user);
             console.log('Login response:', res);
 
-            // Directly check if `res` exists, as `res` is the user object
-            if (res) {
-                localStorage.setItem('userInfo', JSON.stringify(res));
+            // Check if res is valid (i.e., the user exists and the data is valid)
+            if (res && res.isAdmin !== undefined) {
+                // Store the user type and user info in localStorage
+                localStorage.setItem('userType', res.isAdmin ? 'admin' : 'user');
+                localStorage.setItem('userInfo', JSON.stringify(res)); // Store the full user info
+
                 console.log('Stored in localStorage:', localStorage.getItem('userInfo'));
 
-                navigate('/user-dashboard');
+                // Navigate to the appropriate dashboard
+                if (res.isAdmin) {
+                    navigate('/admin-dashboard'); // Admin dashboard for admin users
+                    window.location.reload();
+                } else {
+                    navigate('/user-dashboard'); // User dashboard for regular users
+                    window.location.reload();
+                }
             } else {
                 setError('Invalid email or password');
             }
@@ -40,6 +51,7 @@ export const Login = () => {
             setError('Invalid email or password');
         }
     };
+
 
 
     return (

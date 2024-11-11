@@ -27,3 +27,13 @@ export const LoginUser = async (user) => {
         throw error;
     }
 }
+
+export const DeleteUser = async (id) => {
+    try {
+        const { data } = await api.DeleteUser(id);
+        return data;
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        throw error;
+    }
+};

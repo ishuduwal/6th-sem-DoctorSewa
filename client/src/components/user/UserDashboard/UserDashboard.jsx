@@ -8,6 +8,7 @@ export const UserDashboard = () => {
     const LogoutHandler = () => {
         localStorage.clear();
         navigate('/');
+        location.reload();
     };
     return (
         <div className='flex h-screen w-full pt-16 max-lg:flex-col'>

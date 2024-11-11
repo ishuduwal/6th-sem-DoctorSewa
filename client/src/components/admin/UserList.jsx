@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { GetUser } from '../function/User';
+import { GetUser, DeleteUser } from '../function/User';
 
 export const UserList = () => {
     const [users, setUsers] = useState([]); // Ensure it's initialized as an empty array
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Function to fetch users from the API
     const fetchUsers = async () => {
         try {
             const fetchedUsers = await GetUser();
@@ -15,6 +16,16 @@ export const UserList = () => {
             setError("Failed to fetch users");
             setLoading(false);
             console.error(error);
+        }
+    };
+
+    // Function to handle user deletion
+    const handleDelete = async (id) => {
+        try {
+            await DeleteUser(id);
+            setUsers(users.filter((user) => user._id !== id)); // Update the users state after deletion
+        } catch (error) {
+            console.error("Failed to delete user:", error);
         }
     };
 
@@ -50,7 +61,12 @@ export const UserList = () => {
                                 <td className="py-2 px-4 border-b text-center">{user.lastname}</td>
                                 <td className="py-2 px-4 border-b text-center">{user.email}</td>
                                 <td className="py-2 px-4 border-b text-center">
-                                    <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
+                                    <button
+                                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
+                                        onClick={() => handleDelete(user._id)}
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -67,7 +83,12 @@ export const UserList = () => {
                             </div>
                         </div>
                         <div className="mt-2 text-center space-x-2">
-                            <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
+                            <button
+                                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
+                                onClick={() => handleDelete(user._id)}
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 ))}

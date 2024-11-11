@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [userType, setUserType] = useState(null);
+    const [userName, setUserName] = useState('');
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+    useEffect(() => {
+        const storedUserType = localStorage.getItem('userType');
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        const doctorInfo = JSON.parse(localStorage.getItem('doctorInfo'));
+
+        if (storedUserType === 'user' && userInfo) {
+            setUserType('user');
+            setUserName(userInfo.firstname);
+        } else if (storedUserType === 'doctor' && doctorInfo) {
+            setUserType('doctor');
+            setUserName(doctorInfo.name);
+        }
+    }, []);
 
     return (
         <>
@@ -17,7 +32,19 @@ export const Navbar = () => {
                 <ul className='flex gap-12 max-md:hidden'>
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/appointment'>Our Doctors</Link></li>
-                    <li><Link to='/login' className='flex items-center gap-2'><i className="fa-solid fa-user"></i><p>Sign in</p></Link></li>
+                    <li>
+                        {userType ? (
+                            <Link to={userType === 'user' ? '/user-dashboard' : '/doctor-dashboard'} className='flex items-center gap-2'>
+                                <i className="fa-solid fa-user"></i>
+                                <p>{userName}</p>
+                            </Link>
+                        ) : (
+                            <Link to='/login' className='flex items-center gap-2'>
+                                <i className="fa-solid fa-user"></i>
+                                <p>Sign in</p>
+                            </Link>
+                        )}
+                    </li>
                 </ul>
                 <div className='hidden max-md:flex'>
                     <button onClick={toggleMenu}>

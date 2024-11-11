@@ -37,6 +37,8 @@ export const Signup = () => {
                 localStorage.setItem('lastname', user.lastname);
                 localStorage.setItem('email', user.email);
                 localStorage.setItem('address', user.address);
+                localStorage.setItem('userType', 'user'); // Store user type
+                localStorage.setItem('userInfo', JSON.stringify(res));
 
                 // Log to confirm it was stored
                 console.log('Stored data in localStorage:', {
@@ -47,6 +49,7 @@ export const Signup = () => {
                 });
 
                 navigate('/user-dashboard');
+                window.location.reload();
             } else {
                 setError('Signup failed, please try again.');
             }
