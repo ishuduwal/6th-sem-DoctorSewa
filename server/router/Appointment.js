@@ -3,7 +3,7 @@ import { AddAppointment, GetAllAppointments, GetAppointment } from '../controlle
 
 const router = express.Router();
 
-router.post('/get', GetAppointment);
+router.get('/get', GetAppointment);
 router.get('/all', GetAllAppointments);
 router.post('/book', AddAppointment);
 

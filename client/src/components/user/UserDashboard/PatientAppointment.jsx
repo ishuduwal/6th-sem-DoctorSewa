@@ -1,80 +1,96 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { GetAppointment } from '../../function/Appointment';
 
 export const PatientAppointment = () => {
-    const patients = [
-        {
-            id: 1,
-            firstName: 'Alice',
-            lastName: 'Johnson',
-            email: 'alice.johnson@example.com',
-            specialization: 'cardiologist',
-            date: '22-11-2024 15:30',
-        },
-        {
-            id: 2,
-            firstName: 'Bob',
-            lastName: 'Williams',
-            email: 'bob.williams@example.com',
-            specialization: 'cardiologist',
-            date: '22-11-2024 15:30',
-        },
-        {
-            id: 3,
-            firstName: 'Charlie',
-            lastName: 'Brown',
-            email: 'charlie.brown@example.com',
-            specialization: 'cardiologist',
-            date: '22-11-2024 15:30',
-        },
-    ]
+    const [appointments, setAppointments] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const userEmail = localStorage.getItem('userEmail');
+
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            try {
+                const data = await GetAppointment(userEmail);
+                console.log('Fetched data:', data);
+                setAppointments([data]);
+            } catch (err) {
+                setError('Error fetching appointments');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAppointments();
+    }, [userEmail]);
+
+    console.log('Appointments state:', appointments);
+
     return (
         <div className="p-5 bg-white rounded-lg shadow max-lg:flex justify-center items-center flex-col">
             <h2 className="text-2xl font-bold mb-5">Appointments</h2>
-            <div className="hidden lg:block">
-                <table className="min-w-full bg-white border border-gray-300">
-                    <thead>
-                        <tr>
-                            <th className="py-2 px-4 border-b">First Name</th>
-                            <th className="py-2 px-4 border-b">Last Name</th>
-                            <th className="py-2 px-4 border-b">Email</th>
-                            <th className="py-2 px-4 border-b">Specialization</th>
-                            <th className="py-2 px-4 border-b">Date & Time</th>
-                            <th className="py-2 px-4 border-b">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {patients.map((patient, index) => (
-                            <tr key={patient.id} className={`hover:bg-gray-100 ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
-                                <td className="py-2 px-4 border-b text-center">{patient.firstName}</td>
-                                <td className="py-2 px-4 border-b text-center">{patient.lastName}</td>
-                                <td className="py-2 px-4 border-b text-center">{patient.email}</td>
-                                <td className="py-2 px-4 border-b text-center">{patient.specialization}</td>
-                                <td className="py-2 px-4 border-b text-center">{patient.date}</td>
-                                <td>
-                                    <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700">Pending</button>
-                                </td>
 
+            {loading && <div className="text-center">Loading...</div>}
+
+            {error && <div className="text-red-500 text-center">{error}</div>}
+
+            {appointments.length === 0 && <div className="text-center">No appointments found.</div>}
+
+            <div className="w-full">
+                <div className="hidden lg:block">
+                    <table className="min-w-full bg-white border border-gray-300">
+                        <thead>
+                            <tr>
+                                <th className="py-2 px-4 border-b">Doctor</th>
+                                <th className="py-2 px-4 border-b">Fee</th>
+                                <th className="py-2 px-4 border-b">Date</th>
+                                <th className="py-2 px-4 border-b">Time</th>
+                                <th className="py-2 px-4 border-b">Status</th>
+                                <th className="py-2 px-4 border-b">Patient</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            <div className="block lg:hidden max-lg:flex justify-center flex-col items-center">
-                {patients.map((patient, index) => (
-                    <div key={patient.id} className={`bg-white p-4 mb-4 rounded-lg shadow ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                        <div className="flex justify-between items-center">
-                            <div className="text-right">
-                                <div className="text-lg font-bold">{patient.firstName} {patient.lastName}</div>
-                                <div className="text-sm">{patient.email}</div>
+                        </thead>
+                        <tbody>
+                            {appointments.map((appointment) => (
+                                <tr key={appointment._id} className="hover:bg-gray-100 text-center">
+                                    <td className="py-2 px-4 border-b">{appointment.doctor?.name || 'N/A'}</td>
+                                    <td className="py-2 px-4 border-b">{appointment.doctor?.fee || 'N/A'}</td>
+                                    <td className="py-2 px-4 border-b">{appointment.date}</td>
+                                    <td className="py-2 px-4 border-b">{appointment.time}</td>
+                                    <td className="py-2 px-4 border-b">{appointment.status}</td>
+                                    <td className="py-2 px-4 border-b">{appointment.user?.firstname}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="lg:hidden">
+                    {appointments.map((appointment) => (
+                        <div key={appointment._id} className="mb-6 p-4 bg-gray-100 rounded-lg shadow-lg">
+                            <div className="text-lg font-semibold mb-2">
+                                <span className="font-bold">Doctor:</span> {appointment.doctor?.name || 'N/A'}
+                            </div>
+                            <div className="text-sm text-gray-600 mb-2">
+                                <span className="font-bold">Fee:</span> {appointment.doctor?.fee || 'N/A'}
+                            </div>
+                            <div className="text-sm text-gray-600 mb-2">
+                                <span className="font-bold">Date & Time:</span> {appointment.date} {appointment.time}
+                            </div>
+                            <div className="text-sm text-gray-600 mb-2">
+                                <span className="font-bold">Status:</span> {appointment.status}
+                            </div>
+                            <div className="mt-3">
+                                <div className="text-lg font-semibold">
+                                    <span className="font-bold">Patient:</span> {appointment.user?.firstname} {appointment.user?.lastname}
+                                </div>
+                                <div className="text-sm text-gray-600">
+                                    <span className="font-bold">Email:</span> {appointment.user?.email || 'N/A'}
+                                </div>
                             </div>
                         </div>
-                        <div className="mt-2 text-center space-x-2">
-                            <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700">Approve</button>
-                            <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};

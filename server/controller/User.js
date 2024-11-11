@@ -56,3 +56,16 @@ export const DeleteUser = async (req, res) => {
         res.status(500).json({ message: "An error occurred while deleting the user" });
     }
 };
+
+export const GetUserById = async (req, res) => {
+    const { id } = req.params;  // Get the user ID from the URL params
+    try {
+        const user = await User.findById(id);  // Use Mongoose to find user by ID
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json(user);  // Return the user data
+    } catch (error) {
+        res.status(500).json({ message: "An error occurred", error: error.message });
+    }
+};

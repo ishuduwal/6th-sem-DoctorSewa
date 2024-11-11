@@ -37,3 +37,13 @@ export const DeleteUser = async (id) => {
         throw error;
     }
 };
+
+export const GetUserById = async (id) => {
+    try {
+        const response = await api.GetUserById(id);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+    }
+};

@@ -44,3 +44,13 @@ export const LoginDoctor = async (doctor) => {
         console.log(error)
     }
 }
+
+export const GetDoctorById = async (id) => {
+    try {
+        const response = await api.GetDoctorById(id);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching doctor:", error);
+    }
+};

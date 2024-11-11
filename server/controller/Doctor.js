@@ -76,3 +76,21 @@ export const DoctorLogin = async (req, res) => {
         res.status(404).json(false);
     }
 }
+
+export const GetDoctorById = async (req, res) => {
+    const { id } = req.params;  // Get the doctor ID from the URL params
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Doctor ID is invalid' });
+        }
+
+        const doctor = await Doctor.findById(id);  // Find the doctor by ID
+        if (!doctor) {
+            return res.status(404).json({ message: "Doctor not found" });
+        }
+
+        res.status(200).json(doctor);  // Return the doctor details
+    } catch (error) {
+        res.status(500).json({ message: "An error occurred", error: error.message });
+    }
+};

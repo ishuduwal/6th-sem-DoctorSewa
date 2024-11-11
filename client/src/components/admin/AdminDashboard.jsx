@@ -3,6 +3,7 @@ import { DoctorList } from './DoctorList';
 import { AddDoctors } from './AddDoctors';
 import { UserList } from './UserList';
 import { Navigate } from 'react-router-dom';
+import { Appointment } from './Appointment';
 export const AdminDashboard = () => {
     const [selectedSection, setSelectedSection] = useState('welcome');
     const handleLogout = () => {
@@ -19,6 +20,7 @@ export const AdminDashboard = () => {
                     <li className={`cursor-pointer max-lg:h-2rem max-lg:w-28 p-2 ${selectedSection === 'add-doctors' ? 'bg-purple-700 text-white' : 'bg-white hover:bg-purple-500 hover:text-white'}`} onClick={() => setSelectedSection('add-doctors')}>Add Doctors</li>
                     <li className={`cursor-pointer max-lg:h-2rem max-lg:w-20 p-2 ${selectedSection === 'doctor-list' ? 'bg-purple-700 text-white' : 'bg-white hover:bg-purple-500 hover:text-white'}`} onClick={() => setSelectedSection('doctor-list')}>Doctors</li>
                     <li className={`cursor-pointer max-lg:h-2rem max-lg:w-20 p-2 ${selectedSection === 'user-list' ? 'bg-purple-700 text-white' : 'bg-white hover:bg-purple-500 hover:text-white'}`} onClick={() => setSelectedSection('user-list')}>Users</li>
+                    <li className={`cursor-pointer max-lg:h-2rem max-lg:w-20 p-2 ${selectedSection === 'appointment' ? 'bg-purple-700 text-white' : 'bg-white hover:bg-purple-500 hover:text-white'}`} onClick={() => setSelectedSection('appointment')}>Appointment</li>
                     <li className={`cursor-pointer bg-white max-lg:h-2rem max-lg:w-28 p-2`} onClick={handleLogout}>Logout</li>
                 </ul>
             </div>
@@ -32,6 +34,7 @@ export const AdminDashboard = () => {
                 {selectedSection === 'add-doctors' && <AddDoctors />}
                 {selectedSection === 'doctor-list' && <DoctorList />}
                 {selectedSection === 'user-list' && <UserList />}
+                {selectedSection === 'appointment' && <Appointment />}
             </div>
         </div>
     );
